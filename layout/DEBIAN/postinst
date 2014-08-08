@@ -1,0 +1,13 @@
+#!/bin/sh
+
+chown root:wheel /Library/Switches/SSHToggle.bundle/sshtogglesw
+chmod 4755 /Library/Switches/SSHToggle.bundle/sshtogglesw
+/Library/Switches/SSHToggle.bundle/sshtogglesw
+
+declare -a cydia
+cydia=($CYDIA)
+if [[ ${CYDIA+@} ]]; then
+    eval "echo 'finish:restart' >&${cydia[0]}"
+fi
+
+exit 0

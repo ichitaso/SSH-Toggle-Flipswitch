@@ -1,14 +1,16 @@
 Package: com.ichitaso.sshflipswitch
-Name: SSH Toggle (Flipswitch)
-Depends: firmware (>= 4.0), com.a3tweaks.flipswitch, openssh
+Depends: firmware (>= 7.0), mobilesubstrate, com.a3tweaks.flipswitch, openssh, preferenceloader
 Conflicts: com.jamied360.switch.ssh
 Replaces: com.ichitaso.sshflipswitch
-Version: 1.0
+Name: SSH Toggle (Flipswitch)
+Version: 1.1
 Architecture: iphoneos-arm
 Description: SSH toggle for Flipswitch.
-Maintainer: ichitaso
+Homepage: http://moreinfo.thebigboss.org/moreinfo/depiction.php?file=flipswitchsshDp
+Depiction: http://moreinfo.thebigboss.org/moreinfo/depiction.php?file=flipswitchsshDp
+Maintainer: BigBoss <bigboss@thebigboss.org>
 Author: ichitaso
+Sponsor: thebigboss.org <http://thebigboss.org>
 Section: Addons (Flipswitch)
-Homepage: http://ichitaso.com
-Depiction: 
+dev: ichitaso
 Tag: purpose::extension

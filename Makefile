@@ -1,5 +1,10 @@
-ARCHS = armv6 armv7 armv7s arm64
-THEOS_DEVICE_IP = 192.168.0.14
+ARCHS = armv7 armv7s arm64
+THEOS_DEVICE_IP = 192.168.0.10
+
+TWEAK_NAME = AutoDisableSSH
+AutoDisableSSH_FILES = Tweak.xm
+AutoDisableSSH_LIBRARIES = flipswitch
+AutoDisableSSH_FRAMEWORKS = UIKit
 
 BUNDLE_NAME = SSHToggle
 SSHToggle_FILES = Switch.x
@@ -12,6 +17,7 @@ sshtogglesw_FILES = main.mm
 sshtogglesw_INSTALL_PATH = /Library/Switches/SSHToggle.bundle
 
 include theos/makefiles/common.mk
+include $(THEOS_MAKE_PATH)/tweak.mk
 include $(THEOS_MAKE_PATH)/bundle.mk
 include $(THEOS_MAKE_PATH)/tool.mk
 

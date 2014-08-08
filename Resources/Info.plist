@@ -27,6 +27,6 @@
 	<key>NSPrincipalClass</key>
 	<string>SSHToggleSwitch</string>
 	<key>alternate-action-url</key>
-	<string>prefs:</string>
+	<string>prefs:root=SSH%20Toggle</string>
 </dict>
 </plist>

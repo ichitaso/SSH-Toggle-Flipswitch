@@ -1,6 +1,9 @@
 #import <Foundation/Foundation.h>
 #import <Foundation/NSTask.h>
 
+#define PREF_PATH @"/var/mobile/Library/Preferences/com.ichitaso.sshflipswitch.plist"
+#define kPrefKey @"disableSSH"
+
 static NSString *filePath = @"/var/tmp/sshstate";
 static BOOL sshEnabled;
 

@@ -1,5 +1,9 @@
 #import "FSSwitchDataSource.h"
 #import "FSSwitchPanel.h"
+#import <notify.h>
+
+#define PREF_PATH @"/var/mobile/Library/Preferences/com.ichitaso.sshflipswitch"
+#define kPrefKey @"disableSSH"
 
 static NSString *filePath = @"/var/tmp/sshstate";
 static BOOL sshEnabled;
@@ -13,7 +17,6 @@ static BOOL sshEnabled;
 {
 	if ((self = [super init])) {
         NSFileManager *manager = [NSFileManager defaultManager];
-        
         NSFileHandle *fileHandle = [NSFileHandle fileHandleForReadingAtPath:filePath];
         NSData *data = [fileHandle readDataToEndOfFile];
         NSString *str = [[NSString alloc]initWithData:data
@@ -45,4 +48,16 @@ static BOOL sshEnabled;
     system("/Library/Switches/SSHToggle.bundle/sshtogglesw");
 }
 
+- (void)applyAlternateActionForSwitchIdentifier:(NSString *)switchIdentifier
+{
+    BOOL Tweaks1 = [[[NSDictionary dictionaryWithContentsOfFile:@"/var/mobile/Library/Preferences/net.angelxwind.preferenceorganizer2.plist"] valueForKey:@"ShowTweaks"] boolValue];
+    BOOL Tweaks2 = [[NSFileManager defaultManager] fileExistsAtPath:@"/Library/MobileSubstrate/DynamicLibraries/PreferenceOrganizer2.dylib"];
+    
+    if (Tweaks1)
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"prefs:root=Tweaks&path=SSH%20Toggle"]];
+    else if (Tweaks2 && !Tweaks1)
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"prefs:root=Tweaks&path=SSH%20Toggle"]];
+    else
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"prefs:root=SSH%20Toggle"]];
+}
 @end
