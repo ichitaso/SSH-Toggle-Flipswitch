@@ -1,5 +1,5 @@
 Package: com.ichitaso.sshflipswitch
-Depends: firmware (>= 7.0), mobilesubstrate, com.a3tweaks.flipswitch, openssh, preferenceloader
+Depends: firmware (>= 4.0), mobilesubstrate, com.a3tweaks.flipswitch, openssh, preferenceloader
 Conflicts: com.jamied360.switch.ssh
 Replaces: com.ichitaso.sshflipswitch
 Name: SSH Toggle (Flipswitch)

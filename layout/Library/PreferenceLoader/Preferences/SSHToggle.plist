@@ -39,6 +39,20 @@
 			<key>PostNotification</key>
 			<string>com.ichitaso.sshflipswitch.preferencechanged</string>
 			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<true/>
+			<key>defaults</key>
+			<string>com.ichitaso.sshflipswitch</string>
+			<key>key</key>
+			<string>alertEnabled</string>
+			<key>label</key>
+			<string>Use Alert (automatically close)</string>
+		</dict>
+		<dict>
+			<key>PostNotification</key>
+			<string>com.ichitaso.sshflipswitch.preferencechanged</string>
+			<key>cell</key>
 			<string>PSSliderCell</string>
 			<key>default</key>
 			<string>15</string>

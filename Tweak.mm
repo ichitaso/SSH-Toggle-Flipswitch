@@ -6,9 +6,9 @@
 #define kPrefKey @"disableSSH"
 
 static NSString *filePath = @"/var/tmp/sshstate";
-static NSString *disablePath = @"/var/tmp/sshdisable";
 static BOOL disableSSH;
 static float disableRate;
+static BOOL alertEnabled;
 
 %hook SpringBoard
 - (void)applicationDidFinishLaunching:(id)application
@@ -18,19 +18,24 @@ static float disableRate;
     NSFileManager *manager = [NSFileManager defaultManager];
     
     if (disableSSH && ![manager fileExistsAtPath:filePath]) {
-        [manager createFileAtPath:disablePath contents:nil attributes:nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Disable SSH"
+                                                        message:nil
+                                                       delegate:nil
+                                              cancelButtonTitle:nil
+                                              otherButtonTitles:nil];
+        
+        [self performSelector:@selector(disableSSHTImer:) withObject:alert afterDelay:disableRate];
     }
 }
-
-- (void)frontDisplayDidChange:(SBApplication *)app
+%new(v@:)
+-(void)disableSSHTImer:(id)alert
 {
-    %orig;
-    
-    NSFileManager *manager = [NSFileManager defaultManager];
-    
-    if (disableSSH && [manager removeItemAtPath:disablePath error:nil]) {
-        [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:disableRate]];
-        [[FSSwitchPanel sharedPanel] applyActionForSwitchIdentifier:@"com.ichitaso.sshflipswitch"];
+    [[FSSwitchPanel sharedPanel] applyActionForSwitchIdentifier:@"com.ichitaso.sshflipswitch"];
+    if (alertEnabled) {
+        [alert show];
+        [alert release];
+        [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:1.5f]];
+        [alert dismissWithClickedButtonIndex:0 animated:YES];
     }
 }
 %end
@@ -41,6 +46,9 @@ static void LoadSettings()
     
     id disableSSHPref = [dict objectForKey:kPrefKey];
     disableSSH = disableSSHPref ? [disableSSHPref boolValue] : NO;
+    
+    id alertEnabledPref = [dict objectForKey:@"alertEnabled"];
+    alertEnabled = alertEnabledPref ? [alertEnabledPref boolValue] : YES;
     
     id disableRatePref = [dict objectForKey:@"disableRate"];
     disableRate = disableRatePref ? [disableRatePref floatValue] : 15.0;

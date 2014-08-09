@@ -1,9 +1,6 @@
 #import <Foundation/Foundation.h>
 #import <Foundation/NSTask.h>
 
-#define PREF_PATH @"/var/mobile/Library/Preferences/com.ichitaso.sshflipswitch.plist"
-#define kPrefKey @"disableSSH"
-
 static NSString *filePath = @"/var/tmp/sshstate";
 static BOOL sshEnabled;
 
@@ -43,7 +40,7 @@ int main(int argc, char **argv, char **envp) {
             [manager removeItemAtPath:filePath error:nil];
             [manager createFileAtPath:filePath contents:nil attributes:nil];
             [str2 writeToFile:filePath atomically:YES encoding:NSUTF8StringEncoding error:nil];
-            
+          
             [task setArguments:load];
             [task launch];
         }
